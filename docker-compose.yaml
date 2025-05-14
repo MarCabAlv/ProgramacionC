@@ -1,0 +1,24 @@
+    services:
+      jenkins:
+        networks:
+          - jenkins   
+        image: jenkins/jenkins:2.492.2-jdk17
+        ports:
+          - 8080:8080
+          - 50000:50000
+        environment:
+          DOCKER_HOST: tcp://docker:2376
+          DOCKER_CERT_PATH: /certs/client
+          DOCKER_TLS_VERIFY: 1
+        volumes:
+          - .jenkins-data:/home/marco/.jenkins
+          - .jenkins-cert:/certs/client:ro
+     
+    volumes: 
+      jenkins-data:
+      jenkins-cert:
+     
+    networks:
+      jenkins:
+        driver: bridge
+          #hola
